@@ -13,7 +13,7 @@ const Header = () => {
     }
 
   return (
-    <div className='h-48 flex px-7.5 py-9 justify-between bg-gradient-to-b from-dark from-55% to-transparent text-lg'>
+    <div className=' px-7.5 z-10 fixed top-0 left-0 right-0 px-7.5 h-48 pb-9 flex justify-between bg-gradient-to-b from-dark from-50% to-transparent text-lg'>
         <div className='h-full flex items-center gap-2'>
         <FaArrowLeft className='text-white'/>
         <p className='text-white font-titillium font-'>Romantic Comedy</p>
