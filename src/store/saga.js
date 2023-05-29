@@ -5,16 +5,18 @@ import { MOVIE_LIST } from "./actionTypes";
 
 function* getMovieListSaga(){
     try {
-        const response = yield fetch(`../../API/CONTENTLISTINGPAGE-PAGE1.json`)
+        const response = yield fetch(`https://vorcus.github.io/api/CONTENTLISTINGPAGE-PAGE1.json`)
 
         
         const {
             statusText, status,
         } = response;
-        if(status === 200 && statusText === 'OK'){
+            // console.log("response", response)
+       
             const data = yield response.json();
+            // console.log("Saga data", data)
             yield put(getMoviesListSuccess(data))
-        }
+       
     } catch (error){
         console.log("error ===> ", error)
         const { data } = error.response;
@@ -25,17 +27,17 @@ function* getMovieListSaga(){
 function* getMoreMovieListSaga({payload:{pageName}}){
     console.log("payload", pageName)
     try {
-        const response = yield fetch(`../../API/${pageName}`)
+        const response = yield fetch(`https://vorcus.github.io/api/${pageName}`)
         
         const {
             statusText, status,
         } = response;
-        if(status === 200 && statusText === 'OK'){
+       
             const data = yield response.json();
-            console.log("ssss",data.page["content-items"].content)
+            // console.log("ssss",data.page["content-items"].content)
             // yield put(getMoviesListSuccess(data))
             yield put(getNextMovieListSuccess(data.page["content-items"].content))
-        }
+        
     } catch (error){
         console.log("error ===> ", error)
         const { data } = error.response;

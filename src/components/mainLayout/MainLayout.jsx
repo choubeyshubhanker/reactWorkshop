@@ -14,7 +14,7 @@ const MainLayout = () => {
   const dispatch = useDispatch();
   const firstRender = useRef(true); //to stop rendering of getNextMovieList on first render
 
-  // console.log("data ===", pageData)
+  // console.log("data ===", pageData, listOfMovies)
 
   const handleSearchKeyword = (keyword)=>{ // function to handle search keywords by key pressing or search icon click
     // console.log("word ", keyword)
@@ -61,7 +61,7 @@ const MainLayout = () => {
         window.innerHeight + document.documentElement.scrollTop + 500 >=
         document.documentElement.scrollHeight
       ) {
-        console.log("scroll if")
+        // console.log("scroll if")
          setPage((prev) => prev<=1 ? prev + 1 : prev);
       }
     } catch (error) {
@@ -77,7 +77,7 @@ const MainLayout = () => {
       { pageData.length>0 ? pageData.map((item, i)=>(
         <Thumbnail key={i} name={item.name} image={item["poster-image"]} />
 
-      )) :  !searchResult ? <h1 className=' text-white text-3xl w-full col-span-3'> No Result Found</h1>: nextListOfMovies.map((item, i)=>(
+      )) :  searchResult===false ? <h1 className=' text-white text-3xl w-full col-span-3'> No Result Found</h1>: nextListOfMovies.map((item, i)=>(
         <Thumbnail key={i} name={item.name} image={item["poster-image"]} />
 
       ))
