@@ -5,7 +5,7 @@ const Thumbnail = ({name,image}) => {
   // console.log("name", image)
   const URL = `./Slices/${image}`? `./Slices/${image}` : placeHolderImg;
 
-  const onImageError = (e) => {
+  const onImageError = (e) => { // If image URL doesn't exist
     e.target.src = placeHolderImg
   }
 
@@ -13,7 +13,7 @@ const Thumbnail = ({name,image}) => {
   return (
     <figure className='text-left h-fit lg:m-auto' >
       <div className='test overflow-hidden'>
-        <img className='cover mb-6' src={URL} alt="poster" loading="lazy"  onError={onImageError} /></div>
+        <img className='cover mb-6' src={URL} alt="poster" loading="lazy" title="posterImg"  onError={onImageError} /></div>
       <figcaption className='text-white text-12' > {name} </figcaption>
     </figure>
   )

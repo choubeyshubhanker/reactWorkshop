@@ -9,18 +9,15 @@ const MainLayout = () => {
   const {listOfMovies} = useSelector((store)=> store.movieList)
   const {nextListOfMovies} = useSelector((store)=> store.movieList)
   const [pageData, setPageData] = useState([])
-  const state = useSelector((store)=> store)
   const [page, setPage] = useState(0);
   const [searchResult, setSearchResult] = useState(true);
   const dispatch = useDispatch();
-  const firstRender = useRef(true);
-  // const list = listOfMovies?.page?.["content-items"]?.content
+  const firstRender = useRef(true); //to stop rendering of getNextMovieList on first render
 
-  // console.log("state ===", state)
-  console.log("keyword ===", pageData)
+  // console.log("data ===", pageData)
 
-  const handleSearchKeyword = (keyword)=>{
-    console.log("word ", keyword)
+  const handleSearchKeyword = (keyword)=>{ // function to handle search keywords by key pressing or search icon click
+    // console.log("word ", keyword)
     if(keyword?.length >0){
       var expression = `.*${keyword}.*`;
       let re = new RegExp(expression,"gi");
@@ -32,7 +29,7 @@ const MainLayout = () => {
   }
 
   useEffect(() => {
-    dispatch(getMoviesList())
+    dispatch(getMoviesList()) //gets the first list of movies
   }, [])
 
   useEffect(() => {
@@ -40,7 +37,7 @@ const MainLayout = () => {
       firstRender.current = false;
       return;
     }
-    dispatch(getNextMovieList({pageName:pageNames[page]}))
+    dispatch(getNextMovieList({pageName:pageNames[page]})) // renders more movies while scrolling
   }, [page])
 
   useEffect(() => {
@@ -52,7 +49,8 @@ const MainLayout = () => {
   // console.log("page === ",page)
   // console.log("result ",  nextListOfMovies, listOfMovies?.page?.title );
 
- const handelInfiniteScroll = async () => {
+ const handelInfiniteScroll = async () => { // Used for infinite scrolling
+  
     // console.log("scrollHeight" + document.documentElement.scrollHeight);
     // console.log("innerHeight" + window.innerHeight);
     // console.log("scrollTop" + document.documentElement.scrollTop);
