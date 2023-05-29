@@ -1,13 +1,11 @@
-import { useState } from 'react'
-import MainLayout from './components/MainLayout'
+import MainLayout from './components/mainLayout/MainLayout'
 
 
 function App() {
-
   return (
     <>
       <MainLayout/>
-      </>
+    </>
   )
 }
 
