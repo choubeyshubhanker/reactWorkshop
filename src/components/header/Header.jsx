@@ -27,12 +27,12 @@ const Header = ({ pageTitle, handleSearchKeyword }) => {
   return (
     <div className=" px-7.5 z-10 fixed top-0 left-0 right-0 h-48 pb-9 flex justify-between bg-gradient-to-b from-dark from-50% to-transparent text-lg">
       <div className="h-full flex items-center gap-2">
-        <FaArrowLeft title="backArrow" className="text-white" />
-        <p className="text-white font-titillium font-">{pageTitle}</p>
+        <FaArrowLeft title="backArrow" className="text-white" onClick={()=> {setSearchBoxVisible(false) ,handleSearchKeyword("")}}/>
+        <p className={`text-white font-titillium ${searchBoxVisible ? "hidden" : ""}`}>{pageTitle}</p>
       </div>
-      <div className="h-full flex items-center gap-2 w-auto">
+      <div className="h-full flex items-center justify-end gap-2 w-auto md:w-3/5">
         <input
-          className={`${!searchBoxVisible ? "hidden" : ""} rounded-sm p-1`}
+          className={`${!searchBoxVisible ? "hidden" : ""} rounded-sm p-2 w-full`}
           value={searchKeyword}
           type="search"
           placeholder="Search Here"
@@ -42,7 +42,7 @@ const Header = ({ pageTitle, handleSearchKeyword }) => {
           onChange={(e) => handleSearchBox(e)}
         />
         <FaSearch
-          className="text-white"
+          className="text-white "
           title="searchIcon"
           onClick={handleSearch}
           onMouseDown={(e) => e.preventDefault()}

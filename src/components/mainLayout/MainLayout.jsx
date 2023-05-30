@@ -8,9 +8,9 @@ import { pageNames } from './constant';
 const MainLayout = () => {
   const {listOfMovies} = useSelector((store)=> store.movieList)
   const {nextListOfMovies} = useSelector((store)=> store.movieList)
-  const [pageData, setPageData] = useState([])
-  const [page, setPage] = useState(0);
-  const [searchResult, setSearchResult] = useState(true);
+  const [pageData, setPageData] = useState([]) //For setting search data
+  const [page, setPage] = useState(0); //api page number
+  const [searchResult, setSearchResult] = useState(true); //For showing No result Found
   const dispatch = useDispatch();
   const firstRender = useRef(true); //to stop rendering of getNextMovieList on first render
 
@@ -25,7 +25,10 @@ const MainLayout = () => {
       setPageData(searchedData)
       setSearchResult(searchedData.length > 0 ? true : false)
 
-    } else {setSearchResult(true)}
+    } else {
+      setSearchResult(true)
+      setPageData([])
+    }
   }
 
   useEffect(() => {
@@ -73,7 +76,7 @@ const MainLayout = () => {
   return (
     <main className='relative w-full overflow-x-hidden-hidden h-screen'>
     <Header handleSearchKeyword={handleSearchKeyword} pageTitle={listOfMovies?.page?.title} pageData={pageData} />
-    <section className='listing h-full w-full absolute top-48 grid grid-cols-3 gap-y-24 gap-x-7.5 mx-auto px-7.5'>
+    <section className='listing h-full w-full absolute top-40 grid grid-cols-3 auto-rows-max gap-y-16 gap-x-7.5 mx-auto px-7.5'>
       { pageData.length>0 ? pageData.map((item, i)=>(
         <Thumbnail key={i} name={item.name} image={item["poster-image"]} />
 
